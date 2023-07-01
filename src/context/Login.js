@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { UserContext } from './UserContext'
 import { useNavigate } from "react-router-dom"
 import io from 'socket.io-client'
-const API_URL = process.env.API_URL || 'http://localhost'
+const API_URL = process.env.API_URL 
 const SOCK_URL = process.env.SOCK_URL || 'WSS://localhost'
 
 const Login = () => {
