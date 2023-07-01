@@ -11,8 +11,8 @@ import io from 'socket.io-client'
 
 
 const Login = () => {
-  const API_URL = process.env.API_URL 
-  const SOCK_URL = process.env.SOCK_URL || 'WSS://localhost'
+  const API_URL = process.env.REACT_APP_API_URL 
+  const SOCK_URL = process.env.REACT_APP_SOCK_URL || 'WSS://localhost'
   
   console.log("Variables:",API_URL, SOCK_URL, process.env.REACT_APP_API_URL)
   const socket = io(`${SOCK_URL}:8002`)
