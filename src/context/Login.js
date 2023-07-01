@@ -11,7 +11,10 @@ let s3 = new aws.S3({
 });
 
 const Login = () => {
-
+  let s3 = new aws.S3({
+    API_URL: process.env.API_URL,
+    SOCK_URL: process.env.SOCK_URL
+  });
   console.log("Variables:",API_URL, SOCK_URL)
   const socket = io(`${SOCK_URL}:8002`)
   const navigate = useNavigate()
