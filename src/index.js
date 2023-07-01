@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+const API_URL = process.env.API_URL || 'http://localhost'
+const SOCK_URL = process.env.SOCK_URL || 'WSS://localhost'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
