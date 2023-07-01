@@ -36,7 +36,7 @@ const Login = () => {
     }
     try{
       console.log(API_URL)
-    const response = await fetch(`${API_URL}:8000/login`, options)
+    const response = await fetch(`${API_URL}login`, options)
     const data = await response.json()
     console.log(data)
     if (data.message === "Login Successful") {

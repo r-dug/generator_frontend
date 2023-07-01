@@ -12,7 +12,7 @@ const SOCK_URL = process.env.REACT_APP_SOCK_URL || 'WSS://localhost'
 
 
 const App = () => {
-  const socket = io(`${SOCK_URL}:8002`)
+  const socket = io(`${SOCK_URL}`)
 const API_URL = process.env.REACT_APP_SOCK_URL || 'WSS://localhost';
   const Navigation = () => {
     const { user, setUser } = useContext(UserContext)

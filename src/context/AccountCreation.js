@@ -45,7 +45,7 @@ const RegistrationForm = () => {
           body: JSON.stringify(form),
       }
       try{
-          const response = await fetch(`${API_URL}/registration`, options)
+          const response = await fetch(`${API_URL}registration`, options)
           const data = await response.json()
           console.log("data: ",data.message)
           if (data.message === "User already exists") {
