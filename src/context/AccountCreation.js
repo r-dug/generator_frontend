@@ -39,6 +39,8 @@ const RegistrationForm = () => {
   const sendForm = async (form) => {
       const options = {
           method: "POST",
+          mode: "cors",
+          cache: "no-cache",
           headers:{
               "Content-Type": "application/json"
               },
