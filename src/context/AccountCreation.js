@@ -21,6 +21,7 @@ const schema = yup.object().shape({
 
 const RegistrationForm = () => {
   const API_URL = process.env.REACT_APP_API_URL || 'https://localhost';
+  console.log(API_URL)
     const [formState, setFormState] = useState({
         email: '',
         username: '',
