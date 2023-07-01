@@ -14,7 +14,7 @@ const SOCK_URL = process.env.SOCK_URL || 'WSS://localhost'
 
 const Login = () => {
 
-  console.log("Variables:",API_URL, SOCK_URL)
+  console.log("Variables:",API_URL, SOCK_URL, process.env.API_URL)
   const socket = io(`${SOCK_URL}:8002`)
   const navigate = useNavigate()
   const [username, setUsername] = useState('')
