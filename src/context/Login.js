@@ -2,12 +2,11 @@ import React, { useState, useContext } from 'react'
 import { UserContext } from './UserContext'
 import { useNavigate } from "react-router-dom"
 import io from 'socket.io-client'
-// we will want to create a config file to the actual socket connection url upon launch
-
+const API_URL = process.env.API_URL || 'http://localhost'
+const SOCK_URL = process.env.SOCK_URL || 'WSS://localhost'
 
 const Login = () => {
-  const API_URL = process.env.API_URL || 'http://localhost'
-  const SOCK_URL = process.env.SOCK_URL || 'WSS://localhost'
+
   console.log("Variables:",API_URL, SOCK_URL)
   const socket = io(`${SOCK_URL}:8002`)
   const navigate = useNavigate()
