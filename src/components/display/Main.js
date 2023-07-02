@@ -212,7 +212,7 @@ const Main = () => {
     useEffect(() => {
         try{
             const fetchHistory = async () => {
-                const response = await fetch(`${API_URL}historyGet`, {
+                const response = await fetch(`${API_URL}/historyGet`, {
                     method: 'GET',
                     headers:{
                         id: user
