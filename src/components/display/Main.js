@@ -3,7 +3,7 @@ import { UserContext } from "../../context/UserContext";
 import { useNavigate } from 'react-router-dom';
 const Main = () => {
     // hooks
-    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost';
+    const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1';
     const [resumeValue, setResumeValue] = useState('')
     const [jobValue, setJobValue] = useState('')
     const [optimizedResume, setOptimizedResume] = useState(null)
@@ -34,6 +34,7 @@ const Main = () => {
             const fetchHistory = async () => {
                 const response = await fetch(`${API_URL}/historyGet`, {
                     method: 'GET',
+                    credentials: 'include', 
                     headers:{
                         id: user
                     }
@@ -118,6 +119,7 @@ const Main = () => {
     const openAiReq = async (script, valueupdate) => {
         const options = {
         method: "POST",
+        credentials: 'include', 
         body: JSON.stringify({
             prompt: script
         }),
@@ -181,6 +183,7 @@ const Main = () => {
         try {
         const response = await fetch(`${API_URL}/historyPost`, {
             method: 'POST',
+            credentials: 'include', 
             headers: {
             'Content-Type': 'application/json',
             id: user
@@ -214,6 +217,7 @@ const Main = () => {
             const fetchHistory = async () => {
                 const response = await fetch(`${API_URL}/historyGet`, {
                     method: 'GET',
+                    credentials: 'include',
                     headers:{
                         id: user
                     }

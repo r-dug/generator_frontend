@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom"
 // import io from 'socket.io-client'
 
 const Login = () => { 
-  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000'
-  const SOCK_URL = process.env.REACT_APP_SOCK_URL || 'ws://localhost:8000'
+  const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000'
+  const SOCK_URL = process.env.REACT_APP_SOCK_URL || 'ws://127.0.0.1:8000'
   const [banner, setBanners] = useState(null);
   // const socket = io(`${SOCK_URL}:8002`)
   const navigate = useNavigate()
