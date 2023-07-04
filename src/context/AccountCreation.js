@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
+import { useNavigate } from "react-router-dom"
 import * as yup from "yup"
 const schema = yup.object().shape({
     username: yup
@@ -20,7 +21,8 @@ const schema = yup.object().shape({
   });
 
 const RegistrationForm = () => {
-  const API_URL = process.env.REACT_APP_API_URL
+  const navigate = useNavigate()
+  const API_URL = process.env.REACT_APP_API_URL 
   console.log(API_URL)
     const [formState, setFormState] = useState({
         email: '',
@@ -50,12 +52,14 @@ const RegistrationForm = () => {
           const response = await fetch(`${API_URL}/registration`, options)
           const data = await response.json()
           console.log("data: ",data.message)
+          // wait for response indication of 
           if (data.message === "User already exists") {
             setBanners("I'm sorry but this user already exists!")
-          } else if (data.message === "User created") {
-            setBanners("User Created Successfully!")
           } else if (data.message === "this Email is already in use.") {
             setBanners("Im sorry but this Email is already in use.")
+          } else if (data.message === "User created") {
+            setBanners("User Created Successfully!")
+            navigate('/login')
           }else {
             setBanners("An unexpected error occurred");
           }
@@ -83,11 +87,10 @@ const RegistrationForm = () => {
           {}
       );
       setErrors(errorMessages);
-      // console.error(errorMessages)
       setBanners(Object.values(errors).join(", "))
       });
       
-  // console.log(formState);
+  console.log(formState);
   };
 
   return (
