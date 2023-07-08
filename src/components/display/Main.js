@@ -1,9 +1,13 @@
 import { useState, useEffect, useContext, React} from "react";
 import { UserContext } from "../../context/UserContext";
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie'
+
+// import sendDataToServer from "../util/toServer";
 const Main = () => {
-    // hooks
-    const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1';
+    // variables and hooks
+    const sessionCookie = Cookies.get('session')
+    const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1'
     const [resumeValue, setResumeValue] = useState('')
     const [jobValue, setJobValue] = useState('')
     const [optimizedResume, setOptimizedResume] = useState(null)
@@ -17,6 +21,7 @@ const Main = () => {
     const [historyData, setHistoryData] = useState([])
     const { user, setUser } = useContext(UserContext)
 
+    // userfect to update values of display fields
     useEffect(() => {
         if (optimizedResume !== null && optimizedCover !== null && jobSummary !== null && assessment !== null) {
             sendDataToServer();
@@ -29,6 +34,7 @@ const Main = () => {
         }
       }, [optimizedResume, optimizedCover, jobSummary, assessment]);
       
+    
     useEffect(() => {
         try{
             const fetchHistory = async () => {
@@ -36,7 +42,7 @@ const Main = () => {
                     method: 'GET',
                     credentials: 'include', 
                     headers:{
-                        id: user
+                        id: sessionCookie
                     }
                 });
 
@@ -48,7 +54,7 @@ const Main = () => {
         console.log(error)
         alert("OH NO! we couldn't get the history from the server.")
         }
-    }, [user]);
+    }, []);
 
     
     // a bunch of function expressions
@@ -178,7 +184,7 @@ const Main = () => {
         assessment: assessment,
         summary: jobSummary,
         date: new Date(),
-        userid: user
+        userid: sessionCookie
         }
         try {
         const response = await fetch(`${API_URL}/historyPost`, {
@@ -200,38 +206,6 @@ const Main = () => {
         }
     }
 
-    useEffect(() => {
-        if (optimizedResume !== null && optimizedCover !== null && jobSummary !== null && assessment !== null) {
-            sendDataToServer();
-            setViewResume(optimizedResume);
-            setViewCover(optimizedCover);
-            setViewAssessment(assessment);
-            resetVals()
-            setView('resume');
-          alert("Your application docs are ready!")
-        }
-      }, [optimizedResume, optimizedCover, jobSummary, assessment]);
-      
-    useEffect(() => {
-        try{
-            const fetchHistory = async () => {
-                const response = await fetch(`${API_URL}/historyGet`, {
-                    method: 'GET',
-                    credentials: 'include',
-                    headers:{
-                        id: user
-                    }
-                });
-
-                const data = await response.json();
-                setHistoryData(data);
-                }
-        fetchHistory();
-        }catch (error) {
-        console.log(error)
-        alert("OH NO! we couldn't get the history from the server.")
-        }
-    }, [user]);
 
     return (
         <div className="app">

@@ -1,19 +1,28 @@
-
 import React, { useState, useContext } from 'react'
-import { UserContext } from './UserContext'
+import { UserContext } from '../../context/UserContext'
 import { useNavigate } from "react-router-dom"
-// import io from 'socket.io-client'
+import * as Yup from 'yup'
+import Cookies from 'js-cookie'
+
+import { UserProvider } from '../../context/Provider'
+import { AuthContext, AuthProvider } from '../../context/AuthContext'
+
+const LoginSchema = Yup.object().shape({
+  email: Yup.string().required('Email is required'),
+  password: Yup.string().required('Password is required')
+});
 
 const Login = () => { 
+
+  const authContext = useContext(AuthContext)
+
+
+
   const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000'
-  const SOCK_URL = process.env.REACT_APP_SOCK_URL || 'ws://127.0.0.1:8000'
   const [banner, setBanners] = useState(null);
-  // const socket = io(`${SOCK_URL}:8002`)
   const navigate = useNavigate()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const { setUser } = useContext(UserContext)
-  console.log(API_URL, SOCK_URL)
   const handleUsernameChange = (event) => setUsername(event.target.value)
   const handlePasswordChange = (event) => setPassword(event.target.value)
   const loginAttempt = async (script, valueupdate) => {
@@ -25,18 +34,20 @@ const Login = () => {
       }),
       headers:{
         "Content-Type": "application/json"
-      }
+      },
+      credentials: "include"
     }
     try{
-      console.log(API_URL)
       const response = await fetch(`${API_URL}/login`, options)
       const data = await response.json()
-      console.log(data)
-      if (data.message === "Login Successful") {
-        setUser(data.user)
-        // socket.emit('login', data.user)
+
+      if (data.message === "Login Successful") {        
         setBanners("Congrats. Login successful.")
-        navigate('/main')
+        setTimeout(() => {
+          navigate('/main')
+          window.location.reload()
+        }, 1500);
+        
       }else if (data.message === "Incorrect Password" || data.message === "Incorrect Uname") {
         setBanners("Improper credentials! try again or register a new account.")
       }
@@ -57,11 +68,11 @@ const Login = () => {
       <label className='uName'>
         Username:
         <input type="text" value={username} onChange={handleUsernameChange} />
-      </label>
+      </label><br/><br/>
       <label className='pWord'>
         Password:
         <input type="password" value={password} onChange={handlePasswordChange} />
-      </label>
+      </label><br/><br/>
       <input type="submit" value="Log In" />
     </form>
     </div>

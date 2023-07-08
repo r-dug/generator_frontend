@@ -1,33 +1,37 @@
 // npm modules
-import React, { useContext } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import io from 'socket.io-client'
+import React, { useContext, Suspense, lazy } from 'react'
+import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 // internal components
 import { UserContext } from './context/UserContext'
 import { UserProvider } from './context/Provider'
-import Login from './context/Login'
-import RegistrationForm from './context/AccountCreation'
+import Login from './components/display/Login'
+import RegistrationForm from './components/display/AccountCreation'
 import Main from './components/display/Main'
-import PrivateRoute from './PrivateRoute'
-
-// we will want to create a config file to the actual socket connection url upon launch
-const SOCK_URL = process.env.REACT_APP_SOCK_URL || 'WSS://localhost'
+import cookieCheck from './components/util/cookieCheck'
 
 const App = () => {
-  const socket = io(`${SOCK_URL}:8000`)
+  const sessionCookie = Cookies.get('session')
+  const check = cookieCheck(sessionCookie)
   const Navigation = () => {
-    const { user, setUser } = useContext(UserContext)
-    console.log(user)
     return (
       <nav>
-        {!user && <Link to="/login">Login</Link>}
-        {!user && <Link to="/register">Register</Link>}
-        {user && <Link to="/main">Main</Link>}
-        {user && <button onClick={() => {setUser(null); socket.emit('logout', user)}}>Logout</button>}
+        {!sessionCookie && <Link to="/login">Login </Link>}
+        {!sessionCookie && <br/>}
+        {!sessionCookie && <br/>}
+        {!sessionCookie && <Link to="/register">Register </Link>}
+
+        {sessionCookie && <Link to="/main">Main </Link>}
+        {sessionCookie && <br/>}
+        {sessionCookie && <button onClick={() => {
+          Cookies.remove('session');
+          window.location.reload()
+          }}>Logout </button>}
       </nav>
     )
   }
+
   return (
     <UserProvider>
     <Router>
@@ -35,11 +39,16 @@ const App = () => {
       <Routes>
         <Route path="/login" element={<Login />} /> 
         <Route path="/register" element={<RegistrationForm />} />
-        <Route path="/main"element={<PrivateRoute><Main /></PrivateRoute>} />
+        {sessionCookie ? (
+          <Route path="/main" element={<Main />} />
+        ) : (
+          <Route path="/login" element={<Login />} /> 
+        )}      
       </Routes>
     </Router>
     </UserProvider>
-  );
-};
+  )
+
+}
 
 export default App;

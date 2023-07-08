@@ -42,7 +42,7 @@ button {
 body {
   margin: 0;
   padding: o;
-  background-image: url("paralax2.png"), url("transluscentgradient2.png");
+  background-image: url("./images/paralax2.png"), url("./images/transluscentgradient2.png");
   background-attachment: fixed;
   background-repeat: no-repeat, repeat;
   background-size: cover; 
