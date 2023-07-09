@@ -13,7 +13,7 @@ import deleteCookies from './components/CookieRemoval'
 
 const App = () => {
 
-  const sessionCookie = Cookies.get('session')
+  let sessionCookie = Cookies.get('session')
 
   const Navigation = () => {
     return (
