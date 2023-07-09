@@ -12,6 +12,18 @@ import Main from './components/display/Main'
 import cookieCheck from './components/util/cookieCheck'
 
 const App = () => {
+  function deleteCookies() {
+    var Cookies = document.cookie.split(';');
+      // function to show cookies
+      function showCookies() {
+        var show = document.getElementById("show");
+        show.innerHTML = document.cookie;
+     }
+    // set 1 Jan, 1970 expiry for every cookies
+    for (var i = 0; i < Cookies.length; i++)
+    document.cookie = Cookies[i] + "=;expires=" + new Date(0).toUTCString();
+    showCookies();
+ }
   const sessionCookie = Cookies.get('session')
   const check = cookieCheck(sessionCookie)
   const Navigation = () => {
@@ -25,7 +37,7 @@ const App = () => {
         {sessionCookie && <Link to="/main">Main </Link>}
         {sessionCookie && <br/>}
         {sessionCookie && <button onClick={() => {
-          Cookies.remove('session');
+          deleteCookies();
           window.location.reload()
           }}>Logout </button>}
       </nav>
