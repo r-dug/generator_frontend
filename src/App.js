@@ -14,13 +14,18 @@ import cookieCheck from './components/util/cookieCheck'
 const App = () => {
   
   function deleteCookies() {
-    var allCookies = document.cookie.split(';');
-    console.log(allCookies)
-    // The "expire" attribute of every cookie is 
-    // Set to "Thu, 01 Jan 1970 00:00:00 GMT"
-    for (var i = 0; i < allCookies.length; i++)
-        document.cookie = allCookies[i] + "=;expires="
-        + new Date(0).toUTCString();}
+    Object.keys(Cookies.get()).forEach(function(cookieName) {
+      var neededAttributes = {
+        proxy: true,
+        sameSite: 'none', // cross-site
+        secure: true, // Set to true if using HTTPS
+        httpOnly: false, // Prevent client-side JavaScript from accessing cookies
+        maxAge: 1000*60*30, // Session expiration time (in milliseconds)
+        domain: process.env.COOKIE_ALLOW,
+        path: "/"
+      };
+      Cookies.remove(cookieName, neededAttributes);
+    });}
 
   const sessionCookie = Cookies.get('session')
   console.log(sessionCookie)
