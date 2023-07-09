@@ -90,7 +90,6 @@ const RegistrationForm = () => {
           try{
             setBanners("User Created Successfully!")
             setTimeout(() => {
-              // setRedirectOnLogin(true)
               navigate('/main')
               window.location.reload()
             }, 1000)
