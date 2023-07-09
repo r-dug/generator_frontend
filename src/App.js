@@ -24,6 +24,7 @@ const App = () => {
         domain: process.env.COOKIE_ALLOW,
         path: "/"
       };
+      console.log(cookieName)
       Cookies.remove(cookieName, neededAttributes);
     });}
 
