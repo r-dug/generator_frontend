@@ -24,6 +24,7 @@ const App = () => {
         let gettingStores = browser.cookies.getAllCookieStores()
         console.log(gettingStores)
   const sessionCookie = Cookies.get('session')
+  console.log(sessionCookie)
   const check = cookieCheck(sessionCookie)
   const Navigation = () => {
     return (
