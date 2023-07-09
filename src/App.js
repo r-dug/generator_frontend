@@ -12,18 +12,15 @@ import Main from './components/display/Main'
 import cookieCheck from './components/util/cookieCheck'
 
 const App = () => {
+  
   function deleteCookies() {
-    var Cookies = document.cookie.split(';');
-      // function to show cookies
-      function showCookies() {
-        var show = document.getElementById("show");
-        show.innerHTML = document.cookie;
-     }
-    // set 1 Jan, 1970 expiry for every cookies
-    for (var i = 0; i < Cookies.length; i++)
-    document.cookie = Cookies[i] + "=;expires=" + new Date(0).toUTCString();
-    showCookies();
- }
+    var allCookies = document.cookie.split(';');
+    
+    // The "expire" attribute of every cookie is 
+    // Set to "Thu, 01 Jan 1970 00:00:00 GMT"
+    for (var i = 0; i < allCookies.length; i++)
+        document.cookie = allCookies[i] + "=;expires="
+        + new Date(0).toUTCString();}
   const sessionCookie = Cookies.get('session')
   const check = cookieCheck(sessionCookie)
   const Navigation = () => {
