@@ -43,6 +43,7 @@
     "jest": "^27.4.3",
     "jest-resolve": "^27.4.2",
     "jest-watch-typeahead": "^1.0.0",
+    "jQuery": "^1.7.4",
     "js-cookie": "^3.0.5",
     "mini-css-extract-plugin": "^2.4.5",
     "path": "^0.12.7",
