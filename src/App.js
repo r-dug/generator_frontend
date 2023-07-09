@@ -21,8 +21,7 @@ const App = () => {
     for (var i = 0; i < allCookies.length; i++)
         document.cookie = allCookies[i] + "=;expires="
         + new Date(0).toUTCString();}
-        let gettingStores = browser.cookies.getAllCookieStores()
-        console.log(gettingStores)
+
   const sessionCookie = Cookies.get('session')
   console.log(sessionCookie)
   const check = cookieCheck(sessionCookie)
@@ -38,7 +37,6 @@ const App = () => {
         {sessionCookie && <br/>}
         {sessionCookie && <button onClick={() => {
           deleteCookies();
-          // browser.cookies.remove()
           window.location.reload()
           }}>Logout </button>}
       </nav>
