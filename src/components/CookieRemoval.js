@@ -1,8 +1,15 @@
 import Cookies from 'js-cookie'
 function del(cookieName) {
     console.log(document.cookie)
-    Cookies.remove(cookieName, {path: '/', domain: process.env.COOKIE_ALLOW})
-
+    Cookies.remove(cookieName, {
+        proxy: true,
+        sameSite: 'none', // cross-site
+        secure: true, // Set to true if using HTTPS
+        httpOnly: false, // Prevent client-side JavaScript from accessing cookies
+        maxAge: 60*30*1000, // Session expiration time (in milliseconds)
+        domain: process.env.COOKIE_ALLOW,
+        path: "/"
+    })
 }
 
   
