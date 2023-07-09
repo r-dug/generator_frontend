@@ -39,7 +39,6 @@ const schema = yup.object().shape({
 
 const RegistrationForm = () => {
   // establishing state in component
-  const authContext = useContext(AuthContext)
   const [ loginLoading, setLoginLoading ] = useState(false)
   const [banner, setBanners] = useState(null)
   const [errors, setErrors] = useState({})
@@ -66,6 +65,7 @@ const RegistrationForm = () => {
   }
 
   const sendForm = async (form) => {
+    setLoginLoading(true)
     const options = {
         method: "POST",
         mode: "cors",
@@ -96,7 +96,7 @@ const RegistrationForm = () => {
         } catch (error){}
         }else {
           setBanners("An unexpected error occurred");
-        }
+        }setLoginLoading(false)
         return data
     } catch(error){
     }

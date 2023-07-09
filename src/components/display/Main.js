@@ -1,6 +1,10 @@
 import { useState, useEffect, useContext, React} from "react";
 import { UserContext } from "../../context/UserContext";
 import { useNavigate } from 'react-router-dom';
+import GradientButton from '../common/GradientButton'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+
 import Cookies from 'js-cookie'
 
 // import sendDataToServer from "../util/toServer";
@@ -20,6 +24,7 @@ const Main = () => {
     const [view, setView] = useState('input')
     const [historyData, setHistoryData] = useState([])
     const { user, setUser } = useContext(UserContext)
+    const [ loginLoading, setLoginLoading ] = useState(false)
 
     // userfect to update values of display fields
     useEffect(() => {
@@ -143,6 +148,7 @@ const Main = () => {
     }
 
     const getCompletions = async () => {
+        setLoginLoading(true)
         let values = ['resume', 'summary', 'coverLetter', 'jobFit']
                     
         for  (const val of values) {
@@ -257,16 +263,26 @@ const Main = () => {
                 </div>
                 <div className='navBarBottom'>
                 <button onClick={() => window.location.reload()}>Reload</button><br></br><br></br>
-                <button onClick={async () => {
-                    setView('loading')
-                    await Promise.allSettled([getCompletions()])
-                }}>Generate Assistance on Application!</button>
+                <GradientButton 
+                    type="submit" 
+                    text="Submit"
+                    loading={loginLoading}
+                    onClick={async () => {
+                        setView('loading')
+                        await Promise.allSettled([getCompletions()])
+                        setLoginLoading(false)
+                    }}
+                />
+
                 </div>
             </div>
             )}
             {view === 'loading' && (
             <div>
-                LOADING
+                <span className="flex items-center">
+                <FontAwesomeIcon icon={faCircleNotch} spin />
+                <span className="ml-2">Loading...</span>
+                </span>
             </div>
             )}
             {view === 'resume' && (

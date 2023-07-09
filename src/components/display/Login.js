@@ -6,6 +6,8 @@ import Cookies from 'js-cookie'
 
 import { UserProvider } from '../../context/Provider'
 import { AuthContext, AuthProvider } from '../../context/AuthContext'
+import GradientButton from '../common/GradientButton'
+
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().required('Email is required'),
@@ -25,7 +27,9 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const handleUsernameChange = (event) => setUsername(event.target.value)
   const handlePasswordChange = (event) => setPassword(event.target.value)
+  const [ loginLoading, setLoginLoading ] = useState(false)
   const loginAttempt = async (script, valueupdate) => {
+    setLoginLoading(true)
     const options = {
       method: "POST",
       body: JSON.stringify({
@@ -73,7 +77,11 @@ const Login = () => {
         Password:
         <input type="password" value={password} onChange={handlePasswordChange} />
       </label><br/><br/>
-      <input type="submit" value="Log In" />
+      <GradientButton 
+        type="submit" 
+        text="LOGIN"
+        loading={loginLoading}
+      />
     </form>
     </div>
   )
