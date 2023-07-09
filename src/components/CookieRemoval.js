@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie'
 
 function del(cookieName) {
-    document.cookie = cookieName + `=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;${process.env.COOKIE_ALLOW};`;
+    document.cookie = cookieName + `=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;${process.env.COOKIE_ALLOW};sameSite=none;secure=true;httpOnly=false;`;
   }
 
   
