@@ -1,6 +1,8 @@
 import Cookies from 'js-cookie'
 
-
+function del(cookieName) {
+    document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  }
 
   
 const deleteCookies = () => {
@@ -17,7 +19,7 @@ const deleteCookies = () => {
     }
     console.log(cookieName, neededAttributes)
     // Cookies.set(cookieName, neededAttributes)
-    Cookies.remove(cookieName)
+    del(cookieName)
     })}
 
 export default deleteCookies 
