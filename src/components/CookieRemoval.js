@@ -16,7 +16,7 @@ const deleteCookies = () => {
         path: "/"
     }
     console.log(cookieName, neededAttributes)
-    Cookies.set(cookieName, neededAttributes)
+    // Cookies.set(cookieName, neededAttributes)
     Cookies.remove(cookieName)
     })}
 
