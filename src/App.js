@@ -15,7 +15,7 @@ const App = () => {
   
   function deleteCookies() {
     var allCookies = document.cookie.split(';');
-    
+    console.log(allCookies)
     // The "expire" attribute of every cookie is 
     // Set to "Thu, 01 Jan 1970 00:00:00 GMT"
     for (var i = 0; i < allCookies.length; i++)
