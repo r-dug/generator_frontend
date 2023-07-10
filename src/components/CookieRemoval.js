@@ -14,7 +14,8 @@ const deleteCookies = async () => {
                 "Content-Type": "application/json",
                 "cookies": cookieList
             },
-        credentials: "include"
+        credentials: "include",
+        body: ""
     }
     try{
         const response = await fetch(`${API_URL}/logout`, options)
