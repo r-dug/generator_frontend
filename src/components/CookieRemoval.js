@@ -8,6 +8,7 @@ function del(cookieList) {
         console.log("cookie type: ",typeof cookies)
         let split = cookies[0].split("=")
         console.log("cookie type: ",typeof split)
+        document.cookie = `${split}; expires= ${new Date(0).toUTCString()};path='/';secure=true;httponly=false;`
         let name = split[0]
         console.log("name to delete",name)
         Cookies.remove(name)
