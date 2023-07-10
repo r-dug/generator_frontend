@@ -84,7 +84,7 @@ const RegistrationForm = () => {
         // wait for response indication of 
         if (data.message === "User already exists") {
           setBanners("I'm sorry but this user already exists!")
-        } else if (data.message === "this Email is already in use.") {
+        } else if (data.message === "Email is already in use.") {
           setBanners("Im sorry but this Email is already in use.")
         } else if (data.message === "User created") {
           try{

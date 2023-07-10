@@ -11,7 +11,8 @@ const deleteCookies = async () => {
         mode: "cors",
         cache: "no-cache",
         headers:{
-            "cookies": cookieList
+                "Content-Type": "application/json",
+                "cookies": cookieList
             },
         credentials: "include"
     }
