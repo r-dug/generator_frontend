@@ -19,13 +19,13 @@ function del(cookieList) {
         let name = split[0]
 
         console.log(new Date(0).toUTCString())
-        let newCookie = `${name}=, expires= ${new Date(0).toUTCString()}`
+        let newCookie = `${name}=; expires= ${new Date(0).toUTCString()}`
         // console.log(5, newCookie)
-        // document.cookie = `${name}=, expires= ${new Date(0).toUTCString()},domain=resume-generator.info,path='/',secure=true,httpOnly=false,`
-        // console.log(6, document.cookie)
-        // document.cookie = `${name}=, expires= ${new Date(0).toUTCString()},path='/',secure=true,httpOnly=false,`
-        // console.log(7, document.cookie)
-        document.cookie = `${name}=; expires= ${new Date(0).toUTCString()},path='/'`
+        document.cookie = `${name}=; expires= ${new Date(0).toUTCString()};domain=resume-generator.info;SameSite=None;path='/';Secure=true;httpOnly=false;`
+        console.log(6, document.cookie)
+        document.cookie = `${name}=; expires= ${new Date(0).toUTCString()};path='/';SameSite=None;Secure=true;httpOnly=false;`
+        console.log(7, document.cookie)
+        document.cookie = `${name}=; expires= ${new Date(0).toUTCString()};SameSite=None;path='/'`
         // console.log(8, document.cookie)
         // Cookies.remove(name)
         // console.log(9, document.cookie)
