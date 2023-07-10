@@ -1,5 +1,5 @@
 // npm modules
-import React, { useContext, Suspense, lazy } from 'react'
+import React, { useState, useContext, Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
@@ -10,11 +10,12 @@ import Login from './components/display/Login'
 import RegistrationForm from './components/display/AccountCreation'
 import Main from './components/display/Main'
 import deleteCookies from './components/CookieRemoval'
+import GradientButton from './components/common/GradientButton'
 
 const App = () => {
 
   let sessionCookie = Cookies.get('session')
-
+  const [loginLoading, setLoginLoading] = useState(false)
   const Navigation = () => {
     return (
       <nav>
@@ -25,10 +26,18 @@ const App = () => {
 
         {sessionCookie && <Link to="/main">Main </Link>}
         {sessionCookie && <br/>}
-        {sessionCookie && <button onClick={() => {
-          deleteCookies();
+        {sessionCookie && <GradientButton 
+        type="submit" 
+        text="LOGOUT"
+        loading={loginLoading}
+        onClick={ () =>{
+          setLoginLoading(true)
+          deleteCookies()
+          setLoginLoading(false)
           window.location.reload()
-          }}>Logout </button>}
+        }}
+      />}
+
       </nav>
     )
   }

@@ -1,11 +1,7 @@
 import React, { useState, useContext } from 'react'
-import { UserContext } from '../../context/UserContext'
 import { useNavigate } from "react-router-dom"
 import * as Yup from 'yup'
-import Cookies from 'js-cookie'
 
-import { UserProvider } from '../../context/Provider'
-import { AuthContext, AuthProvider } from '../../context/AuthContext'
 import GradientButton from '../common/GradientButton'
 
 
@@ -15,10 +11,6 @@ const LoginSchema = Yup.object().shape({
 });
 
 const Login = () => { 
-
-  const authContext = useContext(AuthContext)
-
-
 
   const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000'
   const [banner, setBanners] = useState(null);
