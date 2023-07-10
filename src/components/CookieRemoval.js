@@ -1,23 +1,30 @@
 import Cookies from 'js-cookie'
-function del(cookieName) {
-    console.log(document.cookie)
-    Cookies.remove(cookieName, {
-        proxy: true,
-        sameSite: 'none', // cross-site
-        secure: true, // Set to true if using HTTPS
-        httpOnly: false, // Prevent client-side JavaScript from accessing cookies
-        maxAge: 60*30*1000, // Session expiration time (in milliseconds)
-        domain: process.env.COOKIE_ALLOW,
-        path: "/"
-    })
+function del(cookieList) {
+    let cookies = cookieList.split(";")
+    console.log(cookies)
+    while ( cookies.length > 0 ) {
+        console.log("all cookies: ",document.cookie)
+        console.log("cookie list on iteration: ",cookies)
+        console.log("cookie type: ",typeof cookies)
+        let split = cookies[0].split("=")
+        let name = split[0]
+        console.log("name to delete",name)
+        Cookies.remove(name)
+        cookies.shift()
+        
+    }
+    // document.cookie = name + `=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;domain=${process.env.COOKIE_ALLOW};samesite=none;secure=true;`;
+
+    
 }
 
   
 const deleteCookies = () => {
-    console.log(Cookies.get())
-    Object.keys(Cookies.get()).forEach(function(cookieName) {
+    const cookieList = document.cookie
+    console.log(typeof cookieList)
+    console.log(cookieList)
+    del(cookieList)
 
-    del(cookieName)
-    })}
+}
 
 export default deleteCookies 
