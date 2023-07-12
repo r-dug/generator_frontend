@@ -84,9 +84,9 @@ const Main = () => {
         \nAdhere stricly to the facts contained in the original resume and do not to include skills or experience the applicant does not have.
         \n<div> \n${resumeValue} \n</div> \n\n<p> \n${jobValue} \n</p>`
         } else if (type === 'coverLetter') {
-        prompt = `create a cover letter using info from the resume between the html div tags and the job application between the html p tags.
-        \nAdhere stricly to the facts contained in the resume and do not to include skills or experience the applicant does not have.
-        if the value between the html div tags is not a job description or the input between the html p tags is not a job description say "INVALID INPUT"\n
+        prompt = `Create a cover letter using info from the resume between the html div tags and the job application between the html p tags.
+        \nin the cover letter- adhere stricly to the facts contained in the resume and do not to include skills or experience the applicant does not have.
+        if the value between the html div tags is not a job description or the input between the html p tags is not a job description return "INVALID INPUT"\n
         \n<div>n${optimizedResume}\n</div>\n\n<p>\n${jobValue}\n</p> `
         } else if (type === 'jobFit') {
         prompt = `in your response, do not mention the markup language. refer to a resume as "your resume" and a job description as "the job".
