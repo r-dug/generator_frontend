@@ -65,17 +65,14 @@ const Main = () => {
     const handleFileChange = (event) => {
         const fileType = event.target.files[0].type
         const file = event.target.files[0]
-        if (file){
-            if (fileType == "text/plain"){
-
-            }else if (fileType == "application/pdf"){
+        const reader = new FileReader()
+        console.log(fileType)
+        reader.onload = (e) => {
+        const content = e.target.result;
+        setResumeValue(content);
+        };
                 
-            }else if (fileType == ""){
-                
-            }else{
-                console.error("what are you, silly? you gave me a: ", fileType)
-            }
-        }
+        reader.readAsText(file);
     }
     
     const updatePrompts = async (type) => {
@@ -84,7 +81,7 @@ const Main = () => {
         prompt = `
         If the text between the html div tags is a resume and the text between the html p tags is a job description, 
         tailor the resume for the job description and return only the tailored resume.
-        Otherwise, simply respond "INVALID INPUT".
+        \nOtherwise, simply respond "INVALID INPUT".
         \nAdhere stricly to the facts contained in the original resume and do not to include skills or experience the applicant does not have.
         \n<div> \n${resumeValue} \n</div> \n\n<p> \n${jobValue} \n</p>`
         } else if (type === 'coverLetter') {
