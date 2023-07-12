@@ -80,7 +80,7 @@ const Main = () => {
         if (type === 'resume') {
         prompt = `
         If the text between the html div tags is a resume and the text between the html p tags is a job description, 
-        tailor the resume for the job description and return only the tailored resume.
+        tailor the resume for the job description and return only the tailored resume. do not include the job description in your response.
         \nOtherwise, simply respond "INVALID INPUT".
         \nAdhere stricly to the facts contained in the original resume and do not to include skills or experience the applicant does not have.
         \n<div> \n${resumeValue} \n</div> \n\n<p> \n${jobValue} \n</p>`
