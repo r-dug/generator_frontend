@@ -85,7 +85,7 @@ const Main = () => {
         \n<div> \n${resumeValue} \n</div> \n\n<p> \n${jobValue} \n</p>`
         } else if (type === 'coverLetter') {
         prompt = `Create a cover letter using info from the resume between the html div tags and the job application between the html p tags.
-        \nin the cover letter- adhere stricly to the facts contained in the resume and do not to include skills or experience the applicant does not have.
+        \nIn the cover letter- do not to include skills or experience not listed in that resume.
         if the value between the html div tags is not a job description or the input between the html p tags is not a job description return "INVALID INPUT"\n
         \n<div>n${optimizedResume}\n</div>\n\n<p>\n${jobValue}\n</p> `
         } else if (type === 'jobFit') {
