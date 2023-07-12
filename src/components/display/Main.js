@@ -85,16 +85,16 @@ const Main = () => {
         \n<div> \n${resumeValue} \n</div> \n\n<p> \n${jobValue} \n</p>`
         } else if (type === 'coverLetter') {
         prompt = `Create a cover letter using info from the resume between the html div tags and the job application between the html p tags.
-        \nIn the cover letter- do not to include skills or experience not listed in that resume.
-        if the value between the html div tags is not a job description or the input between the html p tags is not a job description return "INVALID INPUT"\n
-        \n<div>n${optimizedResume}\n</div>\n\n<p>\n${jobValue}\n</p> `
+        \nIn the cover letter- do not to include skills or experience not listed in that resume. Accurately portray the job applicant in the letter, in the best light.
+        \nif the value between the html div tags is not a job description or the input between the html p tags is not a job description return "INVALID INPUT"\n
+        \n<div>n${resumeValue}\n</div>\n\n<p>\n${jobValue}\n</p> `
         } else if (type === 'jobFit') {
         prompt = `in your response, do not mention the markup language. refer to a resume as "your resume" and a job description as "the job".
         \nDo you think the resume between the html div tags portrays a strong candidate for the job description between the html p tags?
         \n Are there any skills or knowledge gaps the candidate should address? If so, do you have any recommendations for the applicant?
-        \n<div>\n${optimizedResume}\n</div>\n\n<p>\n${jobValue}\n</p> `
+        \n<div>\n${resumeValue}\n</div>\n\n<p>\n${jobValue}\n</p> `
         }else if (type === 'summary') {
-        prompt = `Summarize the text between the html div tags in exactly four words and return only your four word summary. 
+        prompt = `Return a four word summary to the text between the html div tags.
         \n
         \n<div>\n${jobValue}\n</div>`
         }
