@@ -63,15 +63,19 @@ const Main = () => {
 // a bunch of function expressions
 
     const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        const reader = new FileReader();
+        const fileType = event.target.files[0].type
+        const file = event.target.files[0]
+        if (file){
+            if (fileType == "text/plain"){
 
-        reader.onload = (e) => {
-        const content = e.target.result;
-        setResumeValue(content);
-        };
-
-        reader.readAsText(file);
+            }else if (fileType == "application/pdf"){
+                
+            }else if (fileType == ""){
+                
+            }else{
+                console.error("what are you, silly? you gave me a: ", fileType)
+            }
+        }
     }
     
     const updatePrompts = async (type) => {
@@ -94,13 +98,12 @@ const Main = () => {
         \n Are there any skills or knowledge gaps the candidate should address? If so, do you have any recommendations for the applicant?
         \n<div>\n${resumeValue}\n</div>\n\n<p>\n${jobValue}\n</p> `
         }else if (type === 'summary') {
-        prompt = `Return a four word summary to the text between the html div tags.
+        prompt = `Return only a four word summary to the text between the html div tags.
         \n
         \n<div>\n${jobValue}\n</div>`
         }
         return prompt
     }
-
     const openAiReq = async (script, valueupdate) => {
         const options = {
         method: "POST",
@@ -147,7 +150,8 @@ const Main = () => {
                 id: sessionCookie
                 },
                 body: JSON.stringify({
-                    job: jobValue
+                    job: jobValue,
+                    resumeFile: resumeValue
                 })
             })
             if (!response.ok) {
@@ -255,7 +259,7 @@ const Main = () => {
                 <div className='inputArea'>
                 <label htmlFor="baseResume">Please insert a resume to optimize.</label>
                 <br></br><br></br>
-                <input type="file"  id="baseResume" name="baseResume" accept=".txt" onChange={handleFileChange}></input>
+                <input type="file"  id="baseResume" name="baseResume" accept=".txt, .doc, .dot, .docx, .dotx, .pdf" onChange={handleFileChange}></input>
                 <br></br><br></br>
                 <label htmlFor="jobdescription">Please insert a job description.</label>
                 <br></br><br></br>
@@ -269,7 +273,7 @@ const Main = () => {
                     loading={loginLoading}
                     onClick={async () => {
                         setView('loading')
-                        await Promise.allSettled([getCompletions()])
+                        await Promise.allSettled([getCompletions2()])
                         setLoginLoading(false)
                     }}
                 />
