@@ -98,7 +98,7 @@ const Main = () => {
         \n Are there any skills or knowledge gaps the candidate should address? If so, do you have any recommendations for the applicant?
         \n<div>\n${resumeValue}\n</div>\n\n<p>\n${jobValue}\n</p> `
         }else if (type === 'summary') {
-        prompt = `Return only a four word summary to the text between the html div tags.
+        prompt = `Return only a four word summary to the text between the html div tags. Your response should be exactly four words.
         \n
         \n<div>\n${jobValue}\n</div>`
         }
@@ -273,7 +273,7 @@ const Main = () => {
                     loading={loginLoading}
                     onClick={async () => {
                         setView('loading')
-                        await Promise.allSettled([getCompletions2()])
+                        await Promise.allSettled([getCompletions()])
                         setLoginLoading(false)
                     }}
                 />
