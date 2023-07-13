@@ -64,7 +64,6 @@
     "Router": "^2.1.0",
     "sass-loader": "^12.3.0",
     "semver": "^7.3.5",
-    "serve": "^14.2.0",
     "socket.io": "^4.7.0",
     "socket.io-client": "^4.7.1",
     "source-map-loader": "^3.0.0",
@@ -81,7 +80,7 @@
     "yup": "^1.2.0"
   },
   "scripts": {
-    "start": "react-scripts build && serve -s build"
+    "start": "node scripts/start.js"
   },
   "eslintConfig": {
     "extends": [
